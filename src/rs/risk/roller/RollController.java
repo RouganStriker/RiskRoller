@@ -43,7 +43,7 @@ public class RollController {
 	}
 	
 	private static void rollDice(int numAttack, int numDefend, rollFlags rollFlag){
-		CombatResult combatLog= DiceController.getResult(numAttack, numDefend, rollFlag);
+		CombatResult combatLog= CombatController.getResult(numAttack, numDefend, rollFlag);
 		RiskRollerActivity.getInstance().addCombatLog(combatLog);
 	}
 	

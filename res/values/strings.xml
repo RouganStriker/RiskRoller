@@ -3,5 +3,12 @@
 
     <string name="hello">Hello World, RiskRollerActivityActivity!</string>
     <string name="app_name">RiskRoller</string>
-
+   
+    <string name="combantant_heading">Combantants</string>
+    <string name="default_army">0</string>
+    <string name="reset_btn_txt">Reset Combantants</string>
+    <string name="roll_btn_1_txt">1</string>
+    <string name="roll_btn_2_txt">2</string>
+    <string name="roll_btn_3_txt">3</string>
+    <string name="roll_btn_custom_txt">Custom Roll</string>
 </resources>
