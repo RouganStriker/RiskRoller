@@ -24,7 +24,7 @@ public class RiskRollerActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.risk_main);
         instance = this;
         setupButtons();
         setupCombatLogListView();
@@ -48,10 +48,10 @@ public class RiskRollerActivity extends Activity {
     	combat_log_table.setAdapter(combatAdapter);
     }
     private void setupButtons() {
-		findViewById(R.id.roll_one_btn).setOnClickListener(RollController.rollBtnOnClick(RollController.rollFlags.ROLL_ONE));
-		findViewById(R.id.roll_two_btn).setOnClickListener(RollController.rollBtnOnClick(RollController.rollFlags.ROLL_TWO));
-		findViewById(R.id.roll_three_btn).setOnClickListener(RollController.rollBtnOnClick(RollController.rollFlags.ROLL_THREE));
-		findViewById(R.id.roll_custom_btn).setOnClickListener(RollController.rollBtnOnClick(RollController.rollFlags.ROLL_CUSTOM));
+		findViewById(R.id.roll_one_btn).setOnClickListener(RollBtnController.rollBtnOnClick(RollBtnController.RollFlags.ROLL_ONE));
+		findViewById(R.id.roll_two_btn).setOnClickListener(RollBtnController.rollBtnOnClick(RollBtnController.RollFlags.ROLL_TWO));
+		findViewById(R.id.roll_three_btn).setOnClickListener(RollBtnController.rollBtnOnClick(RollBtnController.RollFlags.ROLL_THREE));
+		findViewById(R.id.roll_custom_btn).setOnClickListener(RollBtnController.rollBtnOnClick(RollBtnController.RollFlags.ROLL_CUSTOM));
 		
 		findViewById(R.id.reset_btn).setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {

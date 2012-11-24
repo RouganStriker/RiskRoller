@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Random;
 
-import rs.risk.roller.RollController.rollFlags;
+import rs.risk.roller.RollBtnController.RollFlags;
 import android.util.Log;
 
 public class CombatController {
@@ -14,32 +14,29 @@ public class CombatController {
 	private static int numDef;
 	private static ArrayList<String> combatLog;
 	
-	public static ArrayList<String> getResult(int numAttackers, int numDefenders, rollFlags action){
-		numAtk = numAttackers;
+	public static ArrayList<String> getResult(int numAttackers, int numDefenders, RollFlags action){
+		numAtk = RiskRollerActivity.getInstance().getNumAttackers();
 		numDef = numDefenders;
 		combatLog = new ArrayList<String>();
 		
+		int attackerStopValue = numAtk - numAttackers;
 		switch(action){
 			case ROLL_CUSTOM:
 				Log.d("ROLLS", "roll all");
-				while(numAtk > 0 && numDef > 0){
+				while(numAtk > attackerStopValue && numDef > 0){
 					combat(numAtk,numDef);
 				}
 				break;
 			case ROLL_THREE:
-				Log.d("ROLLS", "roll three");
 				combat(3,numDef);
 				break;
 			case ROLL_TWO:
-				Log.d("ROLLS", "roll three");
 				combat(2,numDef);
 				break;
 			case ROLL_ONE:
-				Log.d("ROLLS", "roll one");
 				combat(1,numDef);
 				break;
 			default:
-				Log.d("ROLLS", "Error.");
 				break;
 		}
 		RiskRollerActivity.getInstance().updateFields(numAtk, numDef);
@@ -47,26 +44,21 @@ public class CombatController {
 	}
 	
 	private static void combat(int attackers, int defenders){
+		ArrayList<String> current_log = new ArrayList<String>();
 		Integer[] attackerDices = (attackers >= 3)? getDiceRolls(3):getDiceRolls(attackers);	//1 or 2
 		Integer[] defendersDices = (defenders >= 2)? getDiceRolls(2):getDiceRolls(1);	//1
-		combatLog.add("Attackers:{" + Arrays.toString(attackerDices) + ", Defenders:{" + Arrays.toString(defendersDices) + "}");
+		current_log.add("Attackers:{" + Arrays.toString(attackerDices) + ", Defenders:{" + Arrays.toString(defendersDices) + "}");
 		for(int i = 0; i < defendersDices.length && i < attackerDices.length; i++){
-			if(attackSuccessful(attackerDices[i], defendersDices[i])) {
-				combatLog.add("    Attacker(" + attackerDices[i] + ") beats Defender(" + defendersDices[i] + ") army");
+			if(attackerDices[i] > defendersDices[i]) {
+				current_log.add("    Attacker(" + attackerDices[i] + ") beats Defender(" + defendersDices[i] + ") army");
 				numDef--;
 			} else {
-				combatLog.add("    Defender(" + defendersDices[i] + ") beats Attacker(" + attackerDices[i] + ") army");
+				current_log.add("    Defender(" + defendersDices[i] + ") beats Attacker(" + attackerDices[i] + ") army");
 				numAtk--;
 			}
 		}
-	}
-	
-	private static boolean attackSuccessful(int atkRoll, int defRoll){
-		if(atkRoll > defRoll){
-			return true;
-		} else {
-			return false;
-		}
+		current_log.addAll(combatLog);
+		combatLog = current_log;
 	}
 	
 	private static Integer[] getDiceRolls(int numOfRolls){

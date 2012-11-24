@@ -13,4 +13,9 @@
     <string name="roll_btn_2_txt">2</string>
     <string name="roll_btn_3_txt">3</string>
     <string name="roll_btn_custom_txt">Custom Roll</string>
+    
+    <!-- Number picker -->
+    <string name="dialog_set_number">Roll</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_picker_title">How many attackers do you want to use?</string>
 </resources>

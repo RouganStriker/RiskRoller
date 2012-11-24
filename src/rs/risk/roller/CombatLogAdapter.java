@@ -34,7 +34,15 @@ public class CombatLogAdapter extends ArrayAdapter<String> {
                 LayoutInflater vi = RiskRollerActivity.getInstance().getLayoutInflater();
                 log_row_view = vi.inflate(R.layout.log_row, null);
             }
-            ((TextView)log_row_view.findViewById(R.id.combat_log_row)).setText(combat_logs.get(position));
+            
+            TextView row_tv = ((TextView)log_row_view.findViewById(R.id.combat_log_row));
+            row_tv.setText(combat_logs.get(position));
+            if(position == 0 || position == 1 || (position == 2 && combat_logs.get(position).charAt(0) != 'A')){
+            	row_tv.setBackgroundResource(R.color.light_grey);
+            } else {
+            	row_tv.setBackgroundResource(R.color.dark_grey);
+            }
+            
             return log_row_view;
     }
 
