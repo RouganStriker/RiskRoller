@@ -1,70 +1,54 @@
 package rs.risk.roller;
 
-import android.database.DataSetObserver;
+import java.util.ArrayList;
+
+import android.content.Context;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ListAdapter;
+import android.widget.ArrayAdapter;
+import android.widget.TextView;
 
-public class CombatLogAdapter implements ListAdapter {
+public class CombatLogAdapter extends ArrayAdapter<String> {
+	private ArrayList<String> combat_logs;
+	
+	public CombatLogAdapter(Context context, int textViewResourceId, ArrayList<String> combat_logs) {
+		super(context, textViewResourceId, combat_logs);
+		this.combat_logs = combat_logs;
+	}
+	
+	public CombatLogAdapter(Context context, int textViewResourceId) {
+		super(context, textViewResourceId);
+		this.combat_logs = new ArrayList<String>();
+	}
 
+	@Override
 	public int getCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return combat_logs.size();
 	}
+	
+	@Override
+    public View getView(int position, View convertView, ViewGroup parent) {
+            View log_row_view = convertView;
+            if (log_row_view == null) {
+                LayoutInflater vi = RiskRollerActivity.getInstance().getLayoutInflater();
+                log_row_view = vi.inflate(R.layout.log_row, null);
+            }
+            ((TextView)log_row_view.findViewById(R.id.combat_log_row)).setText(combat_logs.get(position));
+            return log_row_view;
+    }
 
-	public Object getItem(int arg0) {
-		// TODO Auto-generated method stub
-		return null;
+	@Override
+	public void clear() {
+		super.clear();
+		combat_logs.clear();
+		notifyDataSetChanged();
 	}
-
-	public long getItemId(int arg0) {
-		// TODO Auto-generated method stub
-		return 0;
+	
+	public void add(ArrayList<String> combat_logs) {
+		//Swapping order of logs, newest on top
+		ArrayList<String> new_combat_logs = combat_logs;
+		new_combat_logs.addAll(this.combat_logs);
+		this.combat_logs = new_combat_logs;
 	}
-
-	public int getItemViewType(int arg0) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public View getView(int arg0, View arg1, ViewGroup arg2) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public int getViewTypeCount() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	public boolean hasStableIds() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean isEmpty() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public void registerDataSetObserver(DataSetObserver arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public void unregisterDataSetObserver(DataSetObserver arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	public boolean areAllItemsEnabled() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	public boolean isEnabled(int arg0) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 }

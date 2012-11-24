@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+    
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Enter the army sizes" />
+    <EditText
+        android:id="@+id/dialog_attacker_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:digits="0123456789"
+        android:hint="Attacking Army"
+        android:inputType="number"
+        android:singleLine="true" >
+        <requestFocus />
+    </EditText>
+    <EditText
+        android:id="@+id/dialog_defender_count"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:digits="0123456789"
+        android:hint="Defending Army"
+        android:inputType="number"
+        android:singleLine="true" />
+</LinearLayout>
